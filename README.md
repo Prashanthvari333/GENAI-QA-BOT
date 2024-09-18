@@ -1,6 +1,11 @@
+
+
 # QA Bot
 
 QA Bot is an intelligent question-answering system that allows users to upload documents, build a knowledge base, and ask questions about the content. It uses advanced natural language processing techniques to provide accurate answers based on the uploaded documents.
+
+# Link to genai-qa-bot (Give a try here ):
+   https://huggingface.co/spaces/prashu333/genAI-qa-bot
 
 ## Features
 - Support for multiple file formats: PDF, DOCX, CSV, TXT, and MD
