@@ -34,3 +34,4 @@ boto3==1.35.19
 sentence-transformers==3.1.0
 cohere==5.9.2
 python-dotenv
+docx2txt

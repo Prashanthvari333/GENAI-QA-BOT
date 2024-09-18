@@ -1,12 +1,13 @@
 #import neccessary libraries
 import gradio as gr
 import PyPDF2
-from docx import Document
+import docx2txt
 import pandas as pd
 import os
 import cohere
 from sentence_transformers import SentenceTransformer
 from transformers import pipeline
+import warnings
 
 # Initialize Pinecone
 from pinecone import Pinecone, ServerlessSpec
@@ -14,6 +15,9 @@ from pinecone import ServerlessSpec
 from dotenv import load_dotenv
 # Load environment variables from the .env file (if present)
 load_dotenv()
+
+# Suppress the specific warning
+warnings.filterwarnings("ignore", message="`clean_up_tokenization_spaces` was not set.*")
 
 cloud = os.environ.get('PINECONE_CLOUD') or 'aws'
 region = os.environ.get('PINECONE_REGION') or 'us-east-1'
@@ -45,7 +49,7 @@ def load_and_preprocess_data(file_path,index_name, chunk_size=1000):
     if file_extension == '.pdf':
         data_chunks = process_pdf(file_path, chunk_size)
     elif file_extension == ".docx":
-        data_chunks = read_word_file(file_path)
+        data_chunks = process_docx(file_path)
     elif file_extension == '.csv':
         data_chunks = process_csv(file_path, chunk_size)
     elif file_extension in ['.txt', '.md']:
@@ -55,12 +59,26 @@ def load_and_preprocess_data(file_path,index_name, chunk_size=1000):
     encode_and_store(data_chunks,index_name)
     return data_chunks
 # Function to read the content of a Word file
-def read_word_file(file_path):
-    doc = Document(file_path)
-    full_text = []
-    for paragraph in doc.paragraphs:
-        full_text.append(paragraph.text)
-    return "\n".join(full_text)
+def process_docx(file_path, chunk_size):
+    def text_generator():
+        # Process the document and yield text
+        for text in docx2txt.process(file_path).split('\n'):
+            yield text + ' '
+
+    chunks = []
+    current_chunk = ''
+
+    for text in text_generator():
+        current_chunk += text
+
+        while len(current_chunk) >= chunk_size:
+            chunks.append(current_chunk[:chunk_size])
+            current_chunk = current_chunk[chunk_size:]
+
+    if current_chunk:  # Add any remaining text as the last chunk
+        chunks.append(current_chunk)
+
+    return chunks 
 
 def process_pdf(file_path, chunk_size):
     chunks = []
