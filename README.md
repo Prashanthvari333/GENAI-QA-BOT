@@ -43,9 +43,9 @@ Before you begin, ensure you have met the following requirements:
    ```bash
    python app.py
    ```
-#Open your web browser and navigate to the URL provided in the terminal (usually http://127.0.0.1:7860).
+# Open your web browser and navigate to the URL provided in the terminal (usually http://127.0.0.1:7860).
 
-#Use the interface to:
+# Use the interface to:
 
 Upload a document (PDF, DOCX, CSV, TXT, or MD)
 Provide a name for the index (use only lowercase letters, numbers, and hyphens)
@@ -54,7 +54,7 @@ Ask questions about the document in the "Knowledge Bot" tab
 
 
 
-#How It Works
+# How It Works
 
 Document Processing: When you upload a document, the system chunks it into smaller pieces and preprocesses the text.
 Embedding Generation: The preprocessed text chunks are converted into vector embeddings using a SentenceTransformer model.
@@ -67,13 +67,13 @@ Uses Cohere's language model to generate an answer based on the retrieved contex
 
 
 
-#Troubleshooting
+# Troubleshooting
 
 If you encounter issues with index creation or deletion, ensure that you have the correct Pinecone API key and permissions.
 Make sure you're not exceeding the maximum number of indexes allowed in your Pinecone plan.
 If you're having trouble with file uploads, check that the file format is supported and the file is not corrupted.
 
-#Contributing
+# Contributing
 Contributions to the QA Bot project are welcome! Please follow these steps:
 
 Fork the repository
@@ -82,12 +82,12 @@ Make your changes and commit them: git commit -m 'Add some feature'
 Push to the branch: git push origin feature-branch-name
 Create a pull request
 
-#Acknowledgements
+# Acknowledgements
 
 Gradio for the user interface
 Pinecone for vector similarity search
 Cohere for natural language processing
 Sentence-Transformers for text embeddings
 
-#Contact
+# Contact
 If you have any questions or feedback, please open an issue on the GitHub repository.
