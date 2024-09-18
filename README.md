@@ -20,5 +20,27 @@ Before you begin, ensure you have met the following requirements:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/qa-bot.git
-   cd qa-bot
+   git clone https://github.com/Prashanthvari333/GENAI-QA-BOT.git
+   cd GENAI-QA-BOT
+   ```
+2. Create a virtual environment and activate it:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
+3. Install the required packages:
+```bash
+pip install -r requirements.txt
+
+```
+4. Create a .env file in the project root directory and add your API keys:
+   ```bash
+   PINECONE_API_KEY=your_pinecone_api_key
+   COHERE_API_KEY=your_cohere_api_key
+   PINECONE_CLOUD=aws  # or gcp, depending on your Pinecone setup
+   PINECONE_REGION=us-east-1  # or your preferred region
+```
+5. Run the application:
+```bash
+python app.py
+```
